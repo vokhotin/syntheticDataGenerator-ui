@@ -1,0 +1,77 @@
+<h2>Talk to Your Data — Chat Tab</h2>
+<p class="subtitle">LLM chat with schema + preview data as context. Does this feel right?</p>
+
+<div class="mockup" style="max-width:900px;margin:0 auto;">
+  <div class="mockup-header">syntheticDataGenerator UI — http://localhost:8000/</div>
+  <div class="mockup-body" style="padding:0;">
+    <div style="display:flex;height:540px;font-size:13px;">
+
+      <!-- Sidebar -->
+      <div style="width:200px;background:#1e1e2e;color:#cdd6f4;display:flex;flex-direction:column;padding:0;border-right:1px solid #313244;flex-shrink:0;">
+        <div style="padding:18px 16px 12px;font-weight:700;font-size:14px;color:#cba6f7;letter-spacing:.5px;border-bottom:1px solid #313244;">
+          🧪 SyntheticData
+        </div>
+        <nav style="padding:12px 8px;flex:1;">
+          <div style="padding:10px 12px;border-radius:6px;color:#a6adc8;cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span>⚙️</span> Data Generation
+          </div>
+          <div style="padding:10px 12px;border-radius:6px;background:#313244;color:#cba6f7;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;">
+            <span>💬</span> Talk to your data
+          </div>
+        </nav>
+      </div>
+
+      <!-- Chat area -->
+      <div style="flex:1;background:#1e1e2e;color:#cdd6f4;display:flex;flex-direction:column;">
+
+        <!-- Context banner -->
+        <div style="padding:10px 18px;background:#181825;border-bottom:1px solid #313244;font-size:12px;color:#6c7086;display:flex;align-items:center;gap:8px;">
+          <span style="color:#a6e3a1;">●</span>
+          Context: <strong style="color:#cdd6f4;">schema.sql</strong> + preview data (authors, books) loaded
+        </div>
+
+        <!-- Messages -->
+        <div style="flex:1;overflow-y:auto;padding:20px 18px;display:flex;flex-direction:column;gap:14px;">
+
+          <!-- Assistant message -->
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#313244;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">🤖</div>
+            <div style="background:#181825;border:1px solid #313244;border-radius:0 8px 8px 8px;padding:10px 14px;max-width:480px;line-height:1.5;font-size:13px;">
+              Hi! I have your schema and preview data loaded. Ask me anything — table structure, relationships, data patterns, or generation ideas.
+            </div>
+          </div>
+
+          <!-- User message -->
+          <div style="display:flex;gap:10px;align-items:flex-start;flex-direction:row-reverse;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#cba6f7;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;color:#1e1e2e;font-weight:700;">V</div>
+            <div style="background:#313244;border-radius:8px 0 8px 8px;padding:10px 14px;max-width:480px;line-height:1.5;font-size:13px;">
+              What foreign key relationships exist between the tables?
+            </div>
+          </div>
+
+          <!-- Assistant streaming response -->
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#313244;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">🤖</div>
+            <div style="background:#181825;border:1px solid #313244;border-radius:0 8px 8px 8px;padding:10px 14px;max-width:480px;line-height:1.5;font-size:13px;">
+              There is one foreign key relationship:<br><br>
+              <code style="background:#313244;padding:2px 6px;border-radius:4px;font-size:12px;">books.author_id → authors.author_id</code><br><br>
+              This means every book must reference a valid author. During generation, authors are created first so their IDs can be used as valid FK values in the books table.<span style="display:inline-block;width:8px;height:14px;background:#cba6f7;margin-left:3px;animation:blink 1s step-end infinite;vertical-align:middle;"></span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Input bar -->
+        <div style="padding:12px 18px;border-top:1px solid #313244;display:flex;gap:8px;align-items:flex-end;">
+          <textarea rows="2" placeholder="Ask about your schema or data…" style="flex:1;background:#181825;border:1px solid #45475a;border-radius:8px;color:#cdd6f4;padding:10px 12px;font-size:13px;resize:none;line-height:1.4;"></textarea>
+          <button style="background:#cba6f7;color:#1e1e2e;border:none;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;height:fit-content;">Send</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+</style>

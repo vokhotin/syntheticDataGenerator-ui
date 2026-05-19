@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthetic Data Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">🧪 SyntheticData</div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-tab="generate">⚙️ Data Generation</button>
+                <button class="nav-item" data-tab="chat">💬 Talk to your data</button>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <!-- Data Generation tab -->
+            <section id="tab-generate" class="tab-content active">
+                <div class="section">
+                    <h2 class="section-title">1. Upload Schema</h2>
+                    <div class="upload-zone" id="upload-zone">
+                        <span class="upload-hint">Drop .sql / .txt / .ddl here</span>
+                        <button class="btn btn-secondary" id="browse-btn">📂 Browse file</button>
+                        <input type="file" id="file-input" accept=".sql,.txt,.ddl" hidden>
+                    </div>
+                    <div class="upload-status" id="upload-status"></div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">2. Instructions <span class="optional">(optional)</span></h2>
+                    <textarea id="instructions" class="textarea" placeholder="e.g. Use Russian names, make dates within the last 2 years…"></textarea>
+                </div>
+
+                <div class="section params-row">
+                    <div class="param-group">
+                        <label class="param-label">Temperature</label>
+                        <div class="slider-row">
+                            <input type="range" id="temperature" min="0" max="100" value="70">
+                            <span id="temperature-value">70</span>
+                        </div>
+                    </div>
+                    <div class="param-group">
+                        <label class="param-label">Max tokens <span class="optional">(optional)</span></label>
+                        <input type="number" id="max-tokens" class="input" placeholder="unlimited" min="1">
+                    </div>
+                </div>
+
+                <div class="section">
+                    <button class="btn btn-primary" id="generate-btn" disabled>⚡ Generate</button>
+                </div>
+
+                <div class="error-banner hidden" id="generate-error"></div>
+
+                <section class="section hidden" id="preview-section">
+                    <h2 class="section-title">3. Preview</h2>
+                    <div id="preview-tables"></div>
+                    <button class="btn btn-apply hidden" id="apply-btn">Apply to Database →</button>
+                </section>
+            </section>
+
+            <!-- Talk to Your Data tab -->
+            <section id="tab-chat" class="tab-content hidden">
+                <div class="empty-state" id="chat-empty">
+                    <p>Generate data first to enable chat.</p>
+                </div>
+                <div class="chat-container hidden" id="chat-container">
+                    <div class="chat-context" id="chat-context"></div>
+                    <div class="chat-messages" id="chat-messages"></div>
+                    <div class="chat-input-bar">
+                        <textarea id="chat-input" class="textarea" rows="2" placeholder="Ask about your schema or data…"></textarea>
+                        <button class="btn btn-primary" id="send-btn">Send</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Apply modal -->
+    <div class="modal-overlay hidden" id="apply-modal">
+        <div class="modal">
+            <h3 class="modal-title">Apply to Database</h3>
+            <label class="param-label">Rows per table (1–1000)</label>
+            <input type="number" id="rows-per-table" class="input" value="100" min="1" max="1000">
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="modal-cancel">Cancel</button>
+                <button class="btn btn-primary" id="modal-confirm">Apply</button>
+            </div>
+            <div class="error-banner hidden" id="apply-error"></div>
+        </div>
+    </div>
+
+    <script src="js/state.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/generate.js"></script>
+    <script src="js/chat.js"></script>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.nav-item').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+                btn.classList.add('active');
+                document.getElementById(`tab-${btn.dataset.tab}`).classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

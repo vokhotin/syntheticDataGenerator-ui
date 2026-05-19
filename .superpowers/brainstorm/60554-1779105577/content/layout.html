@@ -1,0 +1,93 @@
+<h2>Overall Layout</h2>
+<p class="subtitle">Sidebar navigation + main content area. Does this structure feel right?</p>
+
+<div class="mockup" style="max-width:900px;margin:0 auto;">
+  <div class="mockup-header">syntheticDataGenerator UI — http://localhost:8000/</div>
+  <div class="mockup-body" style="padding:0;">
+    <div style="display:flex;height:520px;font-size:13px;">
+
+      <!-- Sidebar -->
+      <div style="width:200px;background:#1e1e2e;color:#cdd6f4;display:flex;flex-direction:column;padding:0;border-right:1px solid #313244;flex-shrink:0;">
+        <div style="padding:18px 16px 12px;font-weight:700;font-size:14px;color:#cba6f7;letter-spacing:.5px;border-bottom:1px solid #313244;">
+          🧪 SyntheticData
+        </div>
+        <nav style="padding:12px 8px;flex:1;">
+          <div style="padding:10px 12px;border-radius:6px;background:#313244;color:#cba6f7;font-weight:600;margin-bottom:4px;cursor:pointer;display:flex;align-items:center;gap:8px;">
+            <span>⚙️</span> Data Generation
+          </div>
+          <div style="padding:10px 12px;border-radius:6px;color:#a6adc8;cursor:pointer;display:flex;align-items:center;gap:8px;">
+            <span>💬</span> Talk to your data
+          </div>
+        </nav>
+      </div>
+
+      <!-- Main content -->
+      <div style="flex:1;background:#1e1e2e;color:#cdd6f4;overflow-y:auto;padding:24px;">
+
+        <!-- Form section -->
+        <div style="margin-bottom:20px;">
+          <h3 style="margin:0 0 16px;color:#cba6f7;font-size:15px;">1. Upload Schema</h3>
+          <div style="border:2px dashed #45475a;border-radius:8px;padding:20px;text-align:center;color:#6c7086;font-size:13px;">
+            Drop .sql / .txt / .ddl file here, or click to browse
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <h3 style="margin:0 0 8px;color:#cba6f7;font-size:15px;">2. Instructions <span style="color:#6c7086;font-weight:400;font-size:12px;">(optional)</span></h3>
+          <textarea style="width:100%;height:72px;background:#181825;border:1px solid #45475a;border-radius:6px;color:#cdd6f4;padding:10px;font-size:13px;resize:vertical;box-sizing:border-box;" placeholder="e.g. Use Russian names, make dates within the last 2 years…"></textarea>
+        </div>
+
+        <div style="margin-bottom:24px;display:flex;align-items:center;gap:24px;">
+          <div>
+            <div style="font-size:12px;color:#6c7086;margin-bottom:4px;">Temperature</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <input type="range" min="0" max="100" value="70" style="width:120px;">
+              <span style="font-size:13px;color:#cdd6f4;">70</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:#6c7086;margin-bottom:4px;">Max tokens <span style="color:#6c7086;">(optional)</span></div>
+            <input type="number" placeholder="unlimited" style="width:110px;background:#181825;border:1px solid #45475a;border-radius:6px;color:#cdd6f4;padding:6px 10px;font-size:13px;">
+          </div>
+        </div>
+
+        <button style="background:#cba6f7;color:#1e1e2e;border:none;border-radius:8px;padding:10px 28px;font-size:14px;font-weight:700;cursor:pointer;">
+          ⚡ Generate
+        </button>
+
+        <!-- Preview section (shown after generation) -->
+        <div style="margin-top:28px;border-top:1px solid #313244;padding-top:20px;">
+          <h3 style="margin:0 0 12px;color:#cba6f7;font-size:15px;">3. Preview</h3>
+          <div style="background:#181825;border:1px solid #313244;border-radius:8px;overflow:hidden;margin-bottom:12px;">
+            <div style="padding:10px 14px;background:#313244;font-weight:600;font-size:13px;display:flex;justify-content:space-between;align-items:center;">
+              <span>📋 authors</span>
+              <span style="color:#6c7086;font-size:11px;">3 rows</span>
+            </div>
+            <table style="width:100%;font-size:12px;border-collapse:collapse;">
+              <thead>
+                <tr style="background:#24273a;">
+                  <th style="padding:6px 10px;text-align:left;color:#6c7086;">author_id</th>
+                  <th style="padding:6px 10px;text-align:left;color:#6c7086;">first_name</th>
+                  <th style="padding:6px 10px;text-align:left;color:#6c7086;">last_name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-top:1px solid #313244;"><td style="padding:6px 10px;">1</td><td style="padding:6px 10px;">Jane</td><td style="padding:6px 10px;">Smith</td></tr>
+                <tr style="border-top:1px solid #313244;"><td style="padding:6px 10px;">2</td><td style="padding:6px 10px;">Carlos</td><td style="padding:6px 10px;">Ruiz</td></tr>
+                <tr style="border-top:1px solid #313244;"><td style="padding:6px 10px;">3</td><td style="padding:6px 10px;">Mei</td><td style="padding:6px 10px;">Wong</td></tr>
+              </tbody>
+            </table>
+            <div style="padding:10px 14px;border-top:1px solid #313244;display:flex;gap:8px;">
+              <input type="text" placeholder="Modify this table… e.g. use only female names" style="flex:1;background:#1e1e2e;border:1px solid #45475a;border-radius:6px;color:#cdd6f4;padding:6px 10px;font-size:12px;">
+              <button style="background:#a6e3a1;color:#1e1e2e;border:none;border-radius:6px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">Submit</button>
+            </div>
+          </div>
+          <button style="background:#89b4fa;color:#1e1e2e;border:none;border-radius:8px;padding:8px 22px;font-size:13px;font-weight:700;cursor:pointer;margin-top:4px;">
+            Apply to Database →
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
